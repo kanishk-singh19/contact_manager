@@ -4,19 +4,16 @@ import contactRoutes from "./routes/contactRoutes";
 
 const app = express();
 
-// app.use(cors());
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://contact-manager-nu-gules.vercel.app"
-    ],
+    origin: "*",
     methods: ["GET", "POST", "DELETE"],
   })
 );
+
 app.use(express.json());
 
-// ✅ Health check route
+// Health check
 app.get("/", (_req, res) => {
   res.send("API is running");
 });
