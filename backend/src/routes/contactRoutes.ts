@@ -19,4 +19,20 @@ router.get("/", async (_req: Request, res: Response) => {
   res.json(contacts);
 });
 
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const deletedContact = await Contact.findByIdAndDelete(id);
+
+    if (!deletedContact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    res.json({ message: "Contact deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete contact" });
+  }
+});
+
 export default router;
